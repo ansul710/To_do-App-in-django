@@ -13,38 +13,36 @@
   <body>
 
 
-
-
     <h1 class="text-center">To-do App</h1><br>
 
+    <div class="container">
 
-    <div class="text-center">
+    <form action="{% url 'to_do_add_new' %}" method="POST"><br>
+        {% csrf_token %}
+        <div class="text-right">
+        <input type="text" name="content"/>
+        <input type="submit" class="btn-primary" value="Add Task" />
+        </div>
+    </form>
+
+
 
     <h3>Your to-dos :</h3>
+
+
     {% for todos in todos %}
-    <li>
+<ul class="list-group">
+    <li class="list-group-item " aria-disabled="true">
     {{ todos.content}}
     <form action="/to_do_delete/{{ todos.id }}/" style="display: inline" method="POST">
         {% csrf_token %}
         <input type="submit" class="btn-danger" value="Delete" />
     </form>
     </li>
+    </ul>
     <br>
     {% endfor %}
-
-    <form action="{% url 'to_do_add_new' %}" method="POST"><br>
-        {% csrf_token %}
-        <input type="text" name="content"/>
-        <input type="submit" class="btn-primary" value="Add" />
-    </form>
-
-    </div>
-
-
-
-
-
-
+ </div>
 
 
 

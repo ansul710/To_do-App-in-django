@@ -21,3 +21,4 @@ def deleteitem(request, post_id):
     delete_item = TodoItems.objects.get(id=post_id)
     delete_item.delete()
     return redirect('todohome')
+

@@ -36,10 +36,12 @@
     {{ todos.content}}
     <form action="/to_do_delete/{{ todos.id }}/" style="display: inline" method="POST">
         {% csrf_token %}
-        <input type="submit" class="btn-danger" value="Delete" />
+        <div class="text-right">
+        <input type="submit" class="btn btn-danger" value="Delete" />
+        </div>
     </form>
     </li>
-    </ul>
+</ul>
     <br>
     {% endfor %}
  </div>

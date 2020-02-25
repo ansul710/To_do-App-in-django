@@ -32,6 +32,7 @@ def cross_off(request, pk):
     item.save()
     return redirect('todohome')
 
+
 def uncross(request, pk):
     item = TodoItems.objects.get(id=pk)
     item.completed = False

@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>To-Do App</title>
+
+      <style>
+
+      </style>
   </head>
   <body>
 
@@ -33,14 +37,29 @@
     {% for todos in todos %}
 <ul class="list-group">
     <li class="list-group-item " aria-disabled="true">
-    {{ todos.content}}
-    <form action="/to_do_delete/{{ todos.id }}/" style="display: inline" method="POST">
+        {% if todos.completed %}
+            <span style="text-decoration: line-through;">{{ todos.content}}</span>
+        {% else %}
+            {{ todos.content}}
+
+        {% endif %}
+    <form style="display: inline" method="POST">
         {% csrf_token %}
         <div class="text-right">
-        <input type="submit" class="btn btn-danger" value="Delete" />
+            {% if todos.completed %}
+                <input formaction="/uncross/{{ todos.id }}/" type="submit" class="btn btn-light" value="Uncross" />
+            {% else %}
+                <input formaction="/cross_off/{{ todos.id }}/" type="submit" class="btn btn-light" value="Cross off" />
+            {% endif %}
+        <input formaction="/to_do_delete/{{ todos.id }}/" type="submit" class="btn btn-info" value="Delete" />
+
+
+
         </div>
     </form>
     </li>
+            <p class="text-left text-info text-muted"><small>Created on:   {{ todos.created_on }}</small></p>
+
 </ul>
     <br>
     {% endfor %}
